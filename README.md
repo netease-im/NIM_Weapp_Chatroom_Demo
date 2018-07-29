@@ -6,4 +6,4 @@
 
 ## 预览
 
-<img src="./res_github/chatroom-demo.gif" style="max-height: 500px"/>
+<img src="./res_github/chatroom-demo.gif" style="max-height: 300px"/>

@@ -1,0 +1,103 @@
+<view class='chatroom-container'>
+  <!-- <view class='room-image'>
+    <image src="{{roomInfo.roomImage}}" mode='widthFix'></image>
+  </view> -->
+  <view class=''>
+    <view class='message-wrapper'>
+  <view class='swiper-tab'>
+    <view class='swiper-tab-item {{currentTab == 0 ? "swiper-tab-item-on" : ""}}' data-current="0" catchtap='switchNav'>聊天互动</view>
+    <!-- <view class='swiper-tab-item {{currentTab == 1 ? "swiper-tab-item-on" : ""}}' data-current="1" catchtap='switchNav'>主播</view> -->
+    <view class='swiper-tab-item {{currentTab == 2 ? "swiper-tab-item-on" : ""}}' data-current="2" catchtap='switchNav'>在线成员</view>
+  </view>
+  <view wx:if="{{currentTab == 0}}">
+    <scroll-view id="recordWrapper" scroll-y="true" scroll-top="{{scrollTop}}" class='chatlist-content' style="overflow:scroll;max-height:{{messageWrapperMaxHeight}}px;">
+        <view class='chatroom-nocontent'>--无更多记录--</view>
+        <!-- 消息记录 -->
+        <view class='record-wrapper'> 
+          <view wx:for="{{messageArr}}" wx:for-item="message" wx:key="{{message.time}}">
+            <view class='record-chatting-item other' style='justify-content: {{message.type === "tip" ? "center" : "flex-start"}}' data-message="{{message}}">
+              <view wx:if="{{message.type === 'memberEnter'}}" class='record-item-welcome'>欢迎 {{message.nick}} 进入房间</view>
+              <view wx:elif="{{message.type === 'memberExit'}}" class='record-item-welcome'>{{message.nick}} 离开房间</view>
+              <view wx:elif="{{message.type !== 'tip'}}" class='record-item-time-nick'>{{message.displayTimeHeader}}  {{message.nick}}</view>
+              <view wx:if="{{message.type === 'geo'}}" data-geo='{{message.geo}}' class='small-map-wrapper' catchtap='fullScreenMap'>
+                <image src="{{iconBase64Map.iconMap}}" class='small-geo-img'></image>
+                <text class='text'>{{message.geo.title}}</text>
+              </view>
+              <view wx:if="{{message.type === 'video'}}" data-video="{{message.video}}" catchtap='requestFullScreenVideo' class='small-video-wrapper'>
+                <view class='video-triangle'></view>
+                <view style='color: #000;'>{{message.video.dur / 1000 << 1 >> 1}}''</view>
+              </view>
+              <rich-text nodes="{{message.nodes}}" wx:if="{{message.type === 'text' || message.type === 'image' || message.type === '猜拳' || message.type === '贴图表情' || message.type === 'file' || message.type === '白板消息' || message.type === '阅后即焚' || message.type === 'robot'}}" class='record-chatting-item-text'>{{message.text}}</rich-text>
+              <rich-text nodes="{{message.nodes}}" wx:if="{{message.type === 'tip'}}" class='tip-rich-text'>{{message.text}}</rich-text>
+            </view>
+          </view>
+        </view>
+    </scroll-view>
+  </view>
+  <view wx:if="{{currentTab == 1}}">
+    <view class='zhubo-wrapper1'>
+      <image src="{{ownerInfo.avatar || defaultAvatar}}" class='roomInfo-image'></image>
+      <view class='roomInfo-content'>
+        <view class='zhubo-announcement-title'>主播: {{ownerInfo.nick}}</view>
+        <view class='zhubo-announcement-content'>在线: {{roomInfo.onlineusercount}}</view>
+      </view>
+    </view>
+    <view class='zhubo-wrapper2'>
+      <view class='zhubo-announcement-title'>公告</view>
+      <view class='line'></view>
+      <view class='zhubo-announcement-content'>{{roomInfo.announcement}}</view>
+    </view>
+  </view>
+  <view wx:if="{{currentTab == 2}}">
+    <view wx:for="{{onlineMember}}" wx:for-item="member" wx:key="member.account" class='online-item'>
+       <image src="{{member.avatar || defaultAvatar}}" class='roomInfo-image border-cir'></image> 
+      <view class='roomInfo-content'>
+        <view class='zhubo-announcement-title'>{{member.nick}}</view>
+        <view class='zhubo-announcement-content'>{{member.type}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+  </view>
+          <!--底部输入框  -->
+        <view wx:if="{{currentTab == 0}}" class='chatinput-wrapper' style='margin-bottom: {{focusFlag ? 20 : 0}}rpx;' catchtap='stopEventPropagation'>
+          <view class='chatinput-content'>
+            <input value='{{inputValue}}' focus='{{focusFlag}}' bindinput='inputChange' bindfocus='inputFocus' bindblur='inputBlur' bindconfirm='inputSend' class='chatinput-input'  placeholder="输入文字" confirm-type='send'></input>
+            <image src='../../images/more.png' catchtap='toggleMore' class='chatinput-img fr'></image>
+            <image src='../../images/emoji.png' catchtap='toggleEmoji' class='chatinput-img fr'></image>
+          </view>
+          <view wx:if="{{emojiFlag}}" class='chatinput-subcontent'>
+            <component-emoji bind:EmojiClick="emojiCLick" bind:EmojiSend="emojiSend"></component-emoji>
+          </view>
+          <view wx:if="{{moreFlag}}" class='more-subcontent'>
+            <view style='display:flex;justify-content: space-between;'>
+              <view class='more-subcontent-item' catchtap='chooseImageToSend'>
+                <image src="{{iconBase64Map.iconAlbum}}" class='image'></image>
+                <text class='text'>相册</text>
+              </view>
+              <!-- <view class='more-subcontent-item' catchtap='chooseImageOrVideo'>
+                <image src="{{iconBase64Map.iconCapture}}" class='image'></image>
+                <text class='text'>拍摄</text>
+              </view>
+              <view class='more-subcontent-item' catchtap='sendTipMessage'>
+                <image src="{{iconBase64Map.iconTip}}" class='image'></image>
+                <text class='text'>Tip</text>
+              </view> -->
+              <view class='more-subcontent-item' catchtap='sendFingerGuess'>
+                <image src="{{iconBase64Map.iconFingerGuess}}" class='image'></image>
+                <text class='text'>猜拳</text>
+              </view>
+              <view class='more-subcontent-item'><view class='image' style='background-color: transparent;'></view><text class='text'></text></view>
+              <view class='more-subcontent-item'><view class='image' style='background-color: transparent;'></view><text class='text'></text></view>
+            </view>
+             <view style='display:flex;justify-content: space-between;'>
+              <!-- <view class='more-subcontent-item' catchtap='choosePosition'>
+                <image src="{{iconBase64Map.iconPosition}}" class='image'></image>
+                <text class='text'>位置</text>
+              </view> -->
+              <view class='more-subcontent-item'><view class='image' style='background-color: transparent;'></view><text class='text'></text></view>
+              <view class='more-subcontent-item'><view class='image' style='background-color: transparent;'></view><text class='text'></text></view>
+            </view> 
+          </view>
+        </view>
+</view>

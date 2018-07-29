@@ -1,0 +1,42 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+<<<<<<< HEAD
+	"libVersion": "1.9.98",
+	"appid": "wxa916d43a91b21e5a",
+	"projectname": "chatroomdemo",
+=======
+	"libVersion": "1.9.1",
+	"appid": "wxa916d43a91b21e5a",
+	"projectname": "nim-chatroom-demo",
+>>>>>>> 6ca11d2de4cd0cc784eebfdb5b3b69aef6038648
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": []
+		}
+	}
+}

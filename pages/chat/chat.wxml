@@ -1,0 +1,4 @@
+<template name="chat">
+  <view>{{test}}</view>
+  <button>测试按钮</button>
+</template>

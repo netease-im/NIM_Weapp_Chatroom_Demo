@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="header">
+    <text class="title">聊天室列表</text>
+    <view class="user">
+      <image class="avatar" src="{{avatar}}" />
+      <text>{{nick}}</text>
+    </view>
+  </view>
+  <view class="card-list">
+    <view class="card" wx:key="{{item.roomid}}" wx:for="{{chatroomList}}" wx:for-item="chatroom" wx:for-index="idx" data-chatroom='{{chatroom}}' catchtap='switchToChatRoom'>
+      <image class="card-logo" src="{{chatroomImageBaseUrl + 'image' + idx + '.png'}}" mode="widthFix" />
+      <view class='chatroom-onlineusercount-wrapper'>
+        <view class='chatroom-onlineusercount-name'>{{chatroom.name}}</view>
+        <view class='chatroom-onlineusercount-num'>
+          {{chatroom.onlineusercount}}人
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

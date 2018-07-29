@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="container center" style='background-color: #0091e4'>
+  <view>
+    <image class="logo" src="/images/yunxin-logo.png" />
+    <view class="label">( 聊天室 )</view>
+  </view>
+  <button class="entry" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 进入聊天室 </button>
+  <view wx:else>请升级微信版本</view>
+</view>

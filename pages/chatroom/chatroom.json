@@ -1,0 +1,5 @@
+{
+    "usingComponents": {
+      "component-emoji": "/components/emoji/emoji"
+    }
+}

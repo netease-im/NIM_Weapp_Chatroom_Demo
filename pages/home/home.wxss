@@ -1,0 +1,30 @@
+.card-list {
+  margin-top: 150rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.card {
+  margin: 20rpx 0;
+  width: 48%;
+  border: 1rpx solid #ccc;
+}
+.card-logo {
+  width: 100%;
+}
+.chatroom-title {
+  font-size: 34rpx;
+}
+.chatroom-onlineusercount-wrapper {
+  display:flex;
+  justify-content:space-between;
+  padding:0 10rpx 10rpx;
+}
+.chatroom-onlineusercount-name {
+  font-size: 30rpx;
+}
+.chatroom-onlineusercount-num {
+  font-size: 30rpx;
+  font-style:italic;
+}

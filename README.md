@@ -6,4 +6,4 @@
 
 ## 预览
 
-<img src="http://oq4pgjmo1.bkt.clouddn.com/wechatchatroom-demo.gif" style="max-height: 500px"/>
+<img src="./res_github/chatroom-demo.gif" style="max-height: 500px"/>
